@@ -8,7 +8,7 @@ It takes user input text, processes the job using a worker queue, stores results
 ## 📸 Application Screenshots
 
 ### 📝 Input Screen
-![Input Screen](./images/inp.png)
+![Screenshot](https://github.com/shyamdevk/Word-Counter-Application-with-Docker-Compose/blob/images/archi.png)
 
 ### 📊 Output Screen
 ![Output Screen](./images/out.png)
