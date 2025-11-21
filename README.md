@@ -87,14 +87,6 @@ All services run on a custom Docker network, enabling seamless communication usi
 
    * Input Frontend → `http://localhost:5000`
    * Results Frontend → `http://localhost:5001`
-## 📸 Application Screenshots
-
-### 📝 Input Screen
-![Input Screen](./images/inp.png)
-
-### 📊 Output Screen
-![Output Screen](./images/out.png)
-
 
 4. **Submit text** → View word-count results.
 
