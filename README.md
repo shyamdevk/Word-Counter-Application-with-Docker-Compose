@@ -11,7 +11,7 @@ It takes user input text, processes the job using a worker queue, stores results
 ![Screenshot](https://github.com/shyamdevk/Word-Counter-Application-with-Docker-Compose/blob/images/archi.png)
 
 ### 📊 Output Screen
-![Output Screen](./images/out.png)
+![Output Screen](out.png)
 
 ---
 
