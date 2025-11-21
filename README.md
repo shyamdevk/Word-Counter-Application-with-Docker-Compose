@@ -1,40 +1,56 @@
-# 📝 Word Counter Application with Docker Compose
+# 📝 Word Counter Application using Docker Compose
 
-A hands-on multi-container application that demonstrates how to use Docker Compose in real-world style. The stack includes an input frontend, result frontend, job worker, Redis queue, and PostgreSQL database — all orchestrated with Docker Compose.
-
----
-
-## 🎯 Overview
-
-This application allows you to:
-- Submit a block of text from the **Input Frontend**  
-- A **Worker** picks up the job using a Redis queue  
-- Word counts are computed and stored in PostgreSQL  
-- The **Results Frontend** fetches and displays the results  
-
-This setup shows how multiple services can **communicate**, **scale**, and **persist data**, using Docker Compose.
+A simple and complete **multi-container application** built using **Docker Compose**.  
+It takes user input text, processes the job using a worker queue, stores results in PostgreSQL, and displays output through a results frontend.
 
 ---
 
-## 🧱 Project Architecture
+## 📸 Application Screenshots
+
+### 📝 Input Screen
+![Input Screen](./images/inp.png)
+
+### 📊 Output Screen
+![Output Screen](./images/out.png)
+
+---
+
+## 🚀 Project Overview
+
+This application demonstrates how multiple independent components can work together using **Docker Compose**.  
+The system flow is:
 
 ```
 
-Input Frontend --> Redis (job queue) --> Worker --> PostgreSQL (storage) --> Results Frontend
+Input Frontend → Redis Queue → Worker → PostgreSQL DB → Output Frontend
 
 ```
 
-All services run on a custom Docker network, enabling seamless communication using service names.
+Each part runs in its own container and communicates through a private Docker network.
 
-### Components
+---
 
-| Service             | Role                                                  |
-|----------------------|-------------------------------------------------------|
-| Input Frontend       | Accepts user text and submits job to Redis           |
-| Redis                | Message queue for jobs                                |
-| Worker               | Picks jobs, counts words, stores results to DB        |
-| PostgreSQL           | Persistent storage for word-count results             |
-| Results Frontend     | Displays recent word-count results                    |
+## 🧱 Architecture Summary
+
+| Component | Description |
+|----------|-------------|
+| **Input Frontend** | Accepts text and sends job to Redis |
+| **Redis Queue** | Handles background job message queue |
+| **Worker** | Processes text and stores results in database |
+| **PostgreSQL DB** | Stores persistent results |
+| **Results Frontend** | Displays processed word counts |
+
+---
+
+## 🛠 Technologies Used (With Percentage Contribution)
+
+| Technology | Usage (%) | Role |
+|-----------|-----------|------|
+| **Python (Flask)** | 40% | Powers the input & output frontend |
+| **Docker & Docker Compose** | 30% | Container orchestration & multi-service setup |
+| **Redis** | 10% | Job queue for background processing |
+| **PostgreSQL** | 15% | Database for storing word count results |
+| **Worker Service (Python)** | 5% | Processes jobs asynchronously |
 
 ---
 
@@ -45,111 +61,82 @@ All services run on a custom Docker network, enabling seamless communication usi
 /
 ├── docker-compose.yml
 ├── input-frontend/
-│   ├── Dockerfile
 │   ├── app.py
+│   ├── Dockerfile
 │   └── templates/index.html
 ├── results-frontend/
-│   ├── Dockerfile
 │   ├── app.py
+│   ├── Dockerfile
 │   └── templates/results.html
 ├── worker/
-│   ├── Dockerfile
-│   └── worker.py
+│   ├── worker.py
+│   └── Dockerfile
 ├── db/
 │   └── init.sql
-└── README.md  ← (you’re here)
+└── images/
+├── inp.png
+└── out.png
 
 ````
 
 ---
 
-## 🚀 Getting Started
+## 🚀 How to Run the Project
 
-1. **Clone the repository**
-
-   ```bash
-   git clone https://github.com/shyamdevk/Word-Counter-Application-with-Docker-Compose.git
+### 1️⃣ Clone the Repository
+```bash
+git clone https://github.com/shyamdevk/Word-Counter-Application-with-Docker-Compose.git
+cd Word-Counter-Application-with-Docker-Compose
 ````
 
-2. **Start all services (build if needed)**
+### 2️⃣ Start Services
 
-   ```bash
-   docker compose up --build
-   ```
-
-   Or to run in the background:
-
-   ```bash
-   docker compose up -d --build
-   ```
-
-3. **Access the frontends**
-
-   * Input Frontend → `http://localhost:5000`
-   * Results Frontend → `http://localhost:5001`
-
-4. **Submit text** → View word-count results.
-
-5. **Stop and clean up**
-
-   ```bash
-   docker compose down
-   ```
-
-   To remove volumes too:
-
-   ```bash
-   docker compose down -v
-   ```
-
----
-
-## 🛠 Why This Project Matters
-
-* Demonstrates how to orchestrate a full stack of services using Docker Compose
-* Shows usage of a message-queue (Redis) + background worker pattern
-* Illustrates persistent data storage with PostgreSQL
-* Highlights inter-service networking, portability, and reproducibility with Docker
-
----
-
-## 📚 What You’ll Learn
-
-* How to define services, networks, volumes in `docker-compose.yml`
-* How services communicate by name in a custom Docker network
-* How to build multi-service applications with Docker Compose
-* How to persist data outside containers (so it's safe after restarts)
-* Basic microservice architecture concepts
-
----
-
-## 📌 Tips & Notes
-
-* Make sure Docker is installed on your machine
-* Use `docker compose ps` to see running services
-* Use `docker compose logs <service>` for service-specific logs
-* If you make changes in code, re-run with `--build` to rebuild images
-* Develop locally by editing `input-frontend` or `worker`, then rebuild
-
----
-
-## 🔗 Links & Resources
-
-* [Docker Compose Documentation](https://docs.docker.com/compose/)
-* [Redis Official Image](https://hub.docker.com/_/redis)
-* [PostgreSQL Official Image](https://hub.docker.com/_/postgres)
-
----
-
-## ✅ Conclusion
-
-This Word Counter stack is an excellent **learning project** for anyone wanting to get hands-on with Docker Compose, multi-container applications, and service orchestration.
-Clone, explore, tweak, and learn how containers can work together — and how Docker Compose simplifies it all.
-
----
-
-
-
-
-::contentReference[oaicite:2]{index=2}
+```bash
+docker compose up --build
 ```
+
+Run in background:
+
+```bash
+docker compose up -d --build
+```
+
+### 3️⃣ Access the App
+
+| Service              | URL                                            |
+| -------------------- | ---------------------------------------------- |
+| **Input Frontend**   | [http://localhost:5000](http://localhost:5000) |
+| **Results Frontend** | [http://localhost:5001](http://localhost:5001) |
+
+### 4️⃣ Stop Everything
+
+```bash
+docker compose down
+```
+
+Remove volumes too:
+
+```bash
+docker compose down -v
+```
+
+---
+
+## 💡 What You Learn From This Project
+
+* How Docker Compose links multiple services
+* Using Redis as a job queue
+* Background processing with a worker service
+* Persisting data with PostgreSQL
+* Structuring containerized applications cleanly
+* Building real multi-container microservice-like architecture
+
+---
+
+## 👍 Final Notes
+
+This project is perfect for **beginners learning Docker Compose**, multi-container apps, and real-world orchestration patterns.
+You can extend it by adding API, authentication, or scaling services.
+
+---
+
